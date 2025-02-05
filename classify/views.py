@@ -14,7 +14,7 @@ def is_prime(n):
 
 # Check if the number is an Armstrong number
 def is_armstrong(n):
-    num_str = str(n)
+    num_str = str(abs(n))  # Use absolute value to handle negative numbers
     power = len(num_str)
     return n == sum(int(digit) ** power for digit in num_str)
 
@@ -31,15 +31,24 @@ def classify_number(request):
             "error": True
         }, status=status.HTTP_400_BAD_REQUEST)
 
+    # Handle negative numbers
+    if number < 0:
+        return Response({
+            "number": number,
+            "error": True,
+            "message": "Negative numbers are not supported."
+        }, status=status.HTTP_400_BAD_REQUEST)
+
     # Classify the number properties
     properties = []
+
+    if is_armstrong(number):
+        properties.append('armstrong')
+        
     if number % 2 == 0:
         properties.append('even')
     else:
         properties.append('odd')
-
-    if is_armstrong(number):
-        properties.append('armstrong')
 
     # Calculate digit sum
     digit_sum = sum(int(digit) for digit in str(number))
