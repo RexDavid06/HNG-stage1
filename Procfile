@@ -1,1 +1,1 @@
-web: python stage1/wsgi.py
+web: gunicorn stage1.wsgi:application
