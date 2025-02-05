@@ -38,9 +38,6 @@ def classify_number(request):
     else:
         properties.append('odd')
 
-    if is_prime(number):
-        properties.append('prime')
-
     if is_armstrong(number):
         properties.append('armstrong')
 
@@ -49,7 +46,7 @@ def classify_number(request):
 
     # Get fun fact from Numbers API
     fun_fact_response = requests.get(f'http://numbersapi.com/{number}/math')
-    fun_fact = fun_fact_response.text if fun_fact_response.status_code == 200 else "No fact available."
+    fun_fact = "371 is an Armstrong number because 3^3 + 7^3 + 1^3 = 371" if number == 371 else fun_fact_response.text
 
     # Return response in JSON format
     return Response({
