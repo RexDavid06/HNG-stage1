@@ -65,4 +65,4 @@ def classify_number(request):
         "properties": properties,
         "digit_sum": digit_sum,
         "fun_fact": fun_fact
-    })
+    }, status=status.HTTP_200_OK)
